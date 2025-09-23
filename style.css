@@ -1,0 +1,460 @@
+/* Reset i podstawowe style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Kolory zgodne z trendami 2025 */
+    --color-primary: #6366f1;
+    --color-primary-hover: #4f46e5;
+    --color-secondary: #f1f5f9;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-warning: #f59e0b;
+
+    /* Neutralne kolory */
+    --color-white: #ffffff;
+    --color-gray-50: #f8fafc;
+    --color-gray-100: #f1f5f9;
+    --color-gray-200: #e2e8f0;
+    --color-gray-300: #cbd5e1;
+    --color-gray-400: #94a3b8;
+    --color-gray-500: #64748b;
+    --color-gray-600: #475569;
+    --color-gray-700: #334155;
+    --color-gray-800: #1e293b;
+    --color-gray-900: #0f172a;
+
+    /* Tło gradientowe */
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-card-hover: rgba(255, 255, 255, 1);
+
+    /* Cienie */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Rozmiary */
+    --border-radius: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 20px;
+
+    /* Fonty */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+
+    /* Spacing */
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+    --spacing-20: 5rem;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-gray-800);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Kontener aplikacji */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-4);
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+    padding: var(--spacing-8) 0;
+}
+
+.header-content {
+    background: var(--bg-card);
+    padding: var(--spacing-8);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.app-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+}
+
+.title-icon {
+    background: var(--color-primary);
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.app-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-600);
+    font-weight: 400;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+}
+
+/* Sekcja dodawania zadań */
+.task-input-section {
+    background: var(--bg-card);
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-group {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: center;
+}
+
+.task-input {
+    flex: 1;
+    padding: var(--spacing-4);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+    transition: all 0.2s ease;
+    background: var(--color-white);
+}
+
+.task-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.task-input::placeholder {
+    color: var(--color-gray-400);
+}
+
+.add-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-4) var(--spacing-6);
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.add-btn:hover {
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.add-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: var(--font-size-lg);
+    font-weight: 400;
+}
+
+/* Sekcja zadań */
+.tasks-section {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.tasks-header {
+    padding: var(--spacing-6);
+    border-bottom: 1px solid var(--color-gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+
+.tasks-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-gray-900);
+}
+
+.tasks-stats {
+    display: flex;
+    gap: var(--spacing-4);
+}
+
+.stat-item {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    background: var(--color-gray-100);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+.tasks-container {
+    min-height: 300px;
+    position: relative;
+}
+
+.tasks-list {
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+/* Stan pusty */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-16) var(--spacing-8);
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-4);
+    opacity: 0.6;
+}
+
+.empty-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-2);
+}
+
+.empty-description {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-500);
+    max-width: 300px;
+}
+
+/* Pojedyncze zadanie */
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+}
+
+.task-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-gray-300);
+}
+
+.task-item.completed {
+    background: var(--color-gray-50);
+    opacity: 0.8;
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-gray-300);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.task-checkbox:hover {
+    border-color: var(--color-primary);
+}
+
+.task-checkbox.checked {
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: white;
+}
+
+.task-text {
+    flex: 1;
+    font-size: var(--font-size-base);
+    color: var(--color-gray-800);
+    transition: all 0.2s ease;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--color-gray-500);
+}
+
+.task-actions {
+    display: flex;
+    gap: var(--spacing-2);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.task-item:hover .task-actions {
+    opacity: 1;
+}
+
+.task-delete {
+    padding: var(--spacing-2);
+    background: var(--color-danger);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.task-delete:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    margin-top: var(--spacing-8);
+}
+
+.footer-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    background: var(--bg-card);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .app-container {
+        padding: var(--spacing-3);
+    }
+
+    .header-content {
+        padding: var(--spacing-6);
+    }
+
+    .app-title {
+        font-size: var(--font-size-3xl);
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+
+    .title-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: var(--font-size-lg);
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tasks-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tasks-stats {
+        flex-wrap: wrap;
+    }
+}
+
+/* Animacje */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: slideIn 0.3s ease;
+}
+
+/* Hover efekty dla kart */
+.task-input-section:hover,
+.tasks-section:hover {
+    box-shadow: var(--shadow-lg);
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Nowoczesna Lista Zadań</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="title-icon">✓</span>
+                    TaskFlow
+                </h1>
+                <p class="app-subtitle">Zarządzaj swoimi zadaniami efektywnie</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="task-input-section">
+                <form id="task-form" class="task-form">
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            id="task-input"
+                            class="task-input"
+                            placeholder="Dodaj nowe zadanie..."
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" class="add-btn">
+                            <span class="btn-icon">+</span>
+                            <span class="btn-text">Dodaj</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tasks-section">
+                <div class="tasks-header">
+                    <h2 class="tasks-title">Twoje zadania</h2>
+                    <div class="tasks-stats">
+                        <span id="tasks-count" class="stat-item">0 zadań</span>
+                        <span id="completed-count" class="stat-item">0 wykonanych</span>
+                    </div>
+                </div>
+
+                <div class="tasks-container">
+                    <div id="tasks-list" class="tasks-list">
+                        <!-- Zadania będą dodawane dynamicznie przez JavaScript -->
+                    </div>
+
+                    <div id="empty-state" class="empty-state">
+                        <div class="empty-icon">📝</div>
+                        <h3 class="empty-title">Brak zadań</h3>
+                        <p class="empty-description">Dodaj swoje pierwsze zadanie, aby rozpocząć organizację pracy</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p class="footer-text">Stworzone z ❤️ używając nowoczesnych technologii web</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
