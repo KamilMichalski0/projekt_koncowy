@@ -4,55 +4,53 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an interactive To-Do web application with JSON file persistence planned for deployment on Vercel. The project follows a frontend + serverless backend architecture pattern.
+Interactive To-Do web application (TaskFlow) with JSON file persistence for Vercel deployment. Currently in active development - frontend (HTML/CSS) completed, backend and JavaScript functionality pending.
 
-## Planned Architecture
+## Current Implementation Status
 
-Based on the implementation plan (Plan_implementacji.md), this project will have:
+**Completed:**
+- `index.html` - Modern UI with glassmorphism design, task form, and semantic structure
+- `style.css` - 2025 design trends with CSS custom properties, responsive layout, animations
 
-**Frontend**: HTML, CSS, and vanilla JavaScript
-- `index.html` - Main UI with form and task list
-- `style.css` - Modern styling
+**Pending:**
 - `script.js` - Frontend logic and API communication
+- `api/tasks.js` - Serverless function for task CRUD operations
+- `db.json` - Data persistence file
 
-**Backend**: Node.js serverless functions on Vercel
-- `api/tasks.js` - Serverless function handling GET/POST requests for tasks
-- `db.json` - JSON file for data persistence
+## Architecture
 
-**API Endpoints**:
-- `GET /api/tasks` - Retrieve all tasks from db.json
-- `POST /api/tasks` - Update task list in db.json
+**Frontend**: Vanilla HTML/CSS/JavaScript with modern design patterns
+- Inter font family for typography
+- Glassmorphism cards with backdrop-filter blur effects
+- CSS custom properties for consistent design system
+- Responsive mobile-first approach
+
+**Backend**: Node.js serverless functions (Vercel)
+- File-based JSON storage for simplicity
+- RESTful API endpoints for task management
+
+**Data Flow**: Frontend ↔ Fetch API ↔ Serverless Functions ↔ JSON file
 
 ## Development Commands
 
-Since this is a simple web application without a build system:
-- No build commands required
-- No package manager configuration present
-- Deploy using Vercel CLI: `vercel` (after installing vercel CLI globally)
+Local development:
+- Serve files with any HTTP server (e.g., `python -m http.server`, `npx serve`, Live Server extension)
+- Deploy: `vercel` (requires Vercel CLI installation)
 
-## File Structure
+## Design System
 
-The project follows this structure:
-```
-/
-├── index.html              # Main UI
-├── style.css               # Styling
-├── script.js               # Frontend logic
-├── api/
-│   └── tasks.js            # Serverless function
-└── db.json                 # Data storage
-```
+The CSS implements a comprehensive design system with:
+- Color palette using CSS custom properties (--color-primary: #6366f1, etc.)
+- Consistent spacing scale (--spacing-1 through --spacing-20)
+- Typography scale with Inter font weights 300-700
+- Border radius system (12px, 16px, 20px for different components)
+- Shadow system for depth and elevation
 
-## Key Implementation Notes
+## Key Implementation Details
 
-- Vercel automatically recognizes files in `api/` folder as serverless functions
-- Frontend communicates with backend via fetch API
-- All data persistence handled through JSON file operations in the serverless function
-- No client-side database or complex state management - simple DOM manipulation
-
-## Deployment
-
-The application is designed for Vercel deployment where:
-- Static files (HTML, CSS, JS) are served directly
-- API functions run as serverless endpoints
-- JSON file persistence works within Vercel's serverless environment
+- **Task Management**: Each task will have checkbox for completion, delete button, and text content
+- **State Management**: Simple DOM manipulation, no framework dependencies
+- **API Design**: GET/POST to `/api/tasks` for retrieving and updating entire task list
+- **Data Persistence**: Serverless function reads/writes to `db.json` file
+- **Empty States**: UI includes empty state messaging when no tasks exist
+- **Statistics**: Header shows task count and completion stats
