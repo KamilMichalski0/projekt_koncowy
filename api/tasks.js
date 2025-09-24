@@ -1,48 +1,34 @@
-// Importujemy moduły Node.js potrzebne do pracy z plikami i ścieżkami
-const fs = require('fs');        // Moduł do czytania i zapisywania plików
-const path = require('path');    // Moduł do pracy ze ścieżkami plików
-
-// Ścieżka do naszego pliku bazy danych (db.json w głównym folderze projektu)
-const DB_PATH = path.join(process.cwd(), 'db.json');
-
-// Funkcja sprawdza czy plik db.json istnieje, jeśli nie - tworzy go
-function ensureDbFile() {
-    if (!fs.existsSync(DB_PATH)) {
-        // Tworzymy pusty plik z początkowymi danymi
-        const initialData = { tasks: [] };
-        fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2));
+// Używamy in-memory storage dla Vercel (serverless environment)
+// Uwaga: Dane będą tymczasowe i resetują się przy każdym cold start
+let tasksCache = [
+    {
+        id: 1,
+        text: "Przykładowy task - aplikacja działa!",
+        completed: false,
+        createdAt: new Date().toISOString()
     }
-}
+];
 
-// Funkcja odczytuje wszystkie zadania z pliku db.json
-function readTasks() {
+// Funkcja odczytuje wszystkie zadania z cache
+async function readTasks() {
     try {
-        ensureDbFile();  // Sprawdzamy czy plik istnieje
-        // Czytamy zawartość pliku jako tekst
-        const data = fs.readFileSync(DB_PATH, 'utf8');
-        // Konwertujemy JSON na obiekt JavaScript
-        const parsed = JSON.parse(data);
-        // Zwracamy listę zadań lub pustą listę jeśli nie ma
-        return parsed.tasks || [];
+        return tasksCache;
     } catch (error) {
-        // Jeśli coś poszło nie tak - logujemy błąd i zwracamy pustą listę
         console.error('Error reading tasks:', error);
         return [];
     }
 }
 
-// Funkcja zapisuje zadania do pliku db.json
-function writeTasks(tasks) {
+// Funkcja zapisuje zadania do cache
+async function writeTasks(tasks) {
     try {
-        // Pakujemy zadania do obiektu z właściwą strukturą
-        const data = { tasks };
-        // Zapisujemy do pliku jako sformatowany JSON (z wcięciami)
-        fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
-        return true;  // Sukces
+        // Aktualizuj cache
+        tasksCache = tasks;
+        console.log('Tasks saved to memory cache:', tasks.length);
+        return true;
     } catch (error) {
-        // Jeśli nie udało się zapisać - logujemy błąd
         console.error('Error writing tasks:', error);
-        return false; // Niepowodzenie
+        return false;
     }
 }
 
@@ -76,7 +62,7 @@ module.exports = async (req, res) => {
     try {
         // Obsługa żądania GET - pobieranie wszystkich zadań
         if (req.method === 'GET') {
-            const tasks = readTasks();  // Czytamy zadania z pliku
+            const tasks = await readTasks();  // Czytamy zadania z cache/storage
             // Wysyłamy odpowiedź z listą zadań
             sendJson(res, 200, {
                 success: true,
@@ -94,7 +80,7 @@ module.exports = async (req, res) => {
             });
 
             // Gdy wszystkie dane dotarły - przetwarzamy je
-            req.on('end', () => {
+            req.on('end', async () => {
                 try {
                     // Parsujemy JSON i wyciągamy listę zadań
                     const { tasks } = JSON.parse(body);
@@ -116,8 +102,8 @@ module.exports = async (req, res) => {
                         createdAt: task.createdAt || new Date().toISOString()  // Data: istniejąca lub aktualna
                     }));
 
-                    // Próbujemy zapisać zadania do pliku
-                    const success = writeTasks(validTasks);
+                    // Próbujemy zapisać zadania do storage
+                    const success = await writeTasks(validTasks);
 
                     if (success) {
                         // Sukces - wysyłamy potwierdzenie

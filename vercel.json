@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/tasks",
+      "dest": "/api/tasks.js",
+      "methods": ["GET", "POST", "OPTIONS"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "functions": {
+    "api/tasks.js": {
+      "maxDuration": 10
+    }
+  },
+  "github": {
+    "silent": true
+  }
+}
